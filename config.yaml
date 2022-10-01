@@ -1,0 +1,61 @@
+---
+HYPERPARAMETERS :
+  lstm:
+    embedding_dim :
+      distribution : choice
+      args : [50, 100, 200, 300]
+      grid : [50, 100]
+    hidden_dim : 
+      distribution : choice
+      args : [32, 64]
+      grid : 32
+    num_layers :
+      distribution : choice
+      args : [2, 3]
+      grid : 2
+    bidirectional :
+      distribution : null
+      args : True
+      grid : True
+    dropout :
+      distribution : null
+      args : 0.3
+      grid : [0.3, 0.5]
+
+  batch_size :
+    distribution : choice
+    args : [128, 256]
+    grid : 256
+  learning_rate :
+    distribution : loguniform
+    args : [0.001, 0.01]
+    grid : [0.001, 0.01]
+
+EXPERIMENT:
+  name : test
+  max_epoch : 2
+  num_samples: 5
+  checkpoint_freq : 1
+  metric : accuracy
+  mode : max
+  verbose: 1
+
+HYPERBAND:
+  reduction_factor : 3
+  grace_period : 1
+
+BOHB:
+  reduction_factor : 3
+
+CLI REPORTER:
+  max_progress_rows : 10
+  max_report_frequency : 5
+  print_intermediate_tables : True
+  metric_columns :
+    - "accuracy"
+    - "loss"
+    - "epoch"
+    - "time_total_s"
+  
+GENERAL:
+  seed : 2021
