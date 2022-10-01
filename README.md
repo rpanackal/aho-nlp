@@ -9,21 +9,25 @@ Tuning is performed for topic classification task on AG News dataset. The exampl
 * Science-Technology
 
 The dataset has 127600 examples, which is preprocessed and split into 3 for training(96000), validation(20000) and testing(7600). 
+For more information, please refer to the link http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html .
+
+The AG's news topic classification dataset is constructed by Xiang Zhang (xiang.zhang@nyu.edu) from the dataset above. It is used as a text classification benchmark in the following paper: Xiang Zhang, Junbo Zhao, Yann LeCun. Character-level Convolutional Networks for Text Classification. Advances in Neural Information Processing Systems 28 (NIPS 2015).
+
 
 Demo includes LSTM and BiLSTM architectures for topic classification. GloVe word vectors are used as dense word embeddings.
 
 Each run of any search algorithm is called an Experiment, and each experiment involves multiple Trials. A single hyperparameter configuration is evaluated in one Trial by measuring accuracy on validation set. The demo is built using **ray.tune** library and the terminologies are adopted from the library.
 
 
-##Getting Started
+## Getting Started
 The demo is designed to be used with docker. Build a docker container with the command
-```docker build -t roshin-panackal-demo .```
+```docker build -t demo .```
 
 To create a container with gpu access, do
-```docker run -it --gpus all -v /local/data/rajanro/embeddings:/ahpo/embeddings --name roshin-panackal-demo  roshin-panackal-demo```
+```docker run -it --gpus all -v /path-to-embeddings/embeddings:/ahpo/embeddings --name demo-image demo```
 
 To create a container without gpu access, do
-```docker run -it -v /local/data/rajanro/embeddings:/ahpo/embeddings --name roshin-panackal-demo  roshin-panackal-demo```
+```docker run -it -v /path-to-embeddings/embeddings:/ahpo/embeddings --name demo-image demo```
 
 By default, the demo uses Hyperband search algorithm. To run the demo, use the following command:
 
